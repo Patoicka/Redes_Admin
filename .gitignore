@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.pyc
+venv/
+.venv/
+eventos.jsonl
+estado_equipos.json
+node_modules/
+dist/
+.claude/
+*.log
+.DS_Store

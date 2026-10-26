@@ -1,0 +1,76 @@
+@import "tailwindcss";
+/* Solo los subconjuntos latin/latin-ext (cubren español: ñ, á, é, í, ó, ú,
+   ü, ¿, ¡) — los combinados de @fontsource traen también cirílico, griego y
+   vietnamita, que no hacen falta aquí y abultan el bundle. */
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/inter/latin-700.css";
+@import "@fontsource/inter/latin-ext-400.css";
+@import "@fontsource/inter/latin-ext-500.css";
+@import "@fontsource/inter/latin-ext-600.css";
+@import "@fontsource/inter/latin-ext-700.css";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Fondos y estructura */
+  --color-page: #05090c;
+  --color-nav: #070c11;
+  --color-card: #0c1216;
+  --color-card-2: #131b1e;
+  --color-line: #263033;
+  --color-sidebar: #080d12;
+
+  /* Identidad y acentos */
+  --color-accent: #ffb547;
+  --color-accent-hot: #ff7a30;
+  --color-ok: #00d6a0;
+  --color-info: #20d9e8;
+
+  /* Estados */
+  --color-danger: #ff5d5d;
+  --color-warn: #ffd166;
+
+  /* Texto */
+  --color-ink: #f2f5f4;
+  --color-ink-2: #b1bdc1;
+  --color-ink-3: #849399;
+  --color-ink-4: #59666b;
+
+  /* Fondos de etiquetas */
+  --color-tag-danger: #241613;
+  --color-tag-ok: #09251f;
+  --color-tag-warn: #292014;
+
+  /* Dona de niveles (ámbar → naranja → cian → esmeralda) */
+  --color-nivel-1: #ffb547;
+  --color-nivel-2: #ff7a30;
+  --color-nivel-3: #20d9e8;
+  --color-nivel-4: #00d6a0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+code,
+.mono {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* Selects / option nativos sobre fondo oscuro */
+select option {
+  background-color: #0c1216;
+  color: #f2f5f4;
+}

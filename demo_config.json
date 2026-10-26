@@ -1,0 +1,5 @@
+{
+  "forzar_fallo_groq": false,
+  "forzar_fallo_deepseek": false,
+  "forzar_fallo_ollama": false
+}

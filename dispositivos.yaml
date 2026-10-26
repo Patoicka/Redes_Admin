@@ -1,0 +1,52 @@
+dispositivos:
+  - nombre: R1
+    rol: router
+    ip_gestion: 192.168.56.10
+    monitoreo:
+      # ether2: trunk real hacia SW1 (debe estar siempre arriba). ether3 sigue
+      # sin nada conectado: se deja monitoreada (pero fuera de requiere_enlace)
+      # para que el escenario de demo "interfaz caída en R1" siga funcionando
+      # sin tocar tráfico real de las VLANs.
+      interfaces: [ether2, ether3]
+      requiere_enlace: [ether2]
+      limite_trafico_bps: 1000000   # 1 Mbps, límite de la licencia CHR
+      umbral_saturacion_pct: 80
+      # VLANs de R1, para el detector de IP fuera de VLAN: en cada ciclo se
+      # captura ARP con /tool sniffer en cada una (ver captura_arp.py).
+      sniffer_segundos: 3
+      # Cuánto se sigue reportando un host mal configurado que dejó de hablar,
+      # salvo que antes se lo vea en /ip arp con una IP correcta.
+      memoria_ip_fuera_de_vlan_segundos: 120
+      vlans:
+        - interfaz: vlan10
+          subred: 192.168.10.0/24
+        - interfaz: vlan20
+          subred: 192.168.20.0/24
+        - interfaz: vlan30
+          subred: 192.168.30.0/24
+
+  - nombre: SW1
+    rol: switch
+    ip_gestion: 192.168.56.11
+    monitoreo:
+      # ether2: trunk hacia R1. ether3: trunk hacia SW2. ether4: acceso VLAN10
+      # (PC-ADMIN).
+      interfaces: [ether2, ether3, ether4]
+      # Solo los trunks deben estar siempre arriba; que un puerto de acceso
+      # no tenga enlace (PC apagada) no es una falla de red.
+      requiere_enlace: [ether2, ether3]
+      limite_trafico_bps: 1000000   # 1 Mbps, límite de la licencia CHR
+      umbral_saturacion_pct: 80
+      vlans: []
+
+  - nombre: SW2
+    rol: switch
+    ip_gestion: 192.168.56.12
+    monitoreo:
+      # ether2: trunk hacia SW1. ether3/ether4: acceso VLAN20 (PC-VEN1,
+      # PC-VEN2). ether5: acceso VLAN30 (SRV1).
+      interfaces: [ether2, ether3, ether4, ether5]
+      requiere_enlace: [ether2]
+      limite_trafico_bps: 1000000   # 1 Mbps, límite de la licencia CHR
+      umbral_saturacion_pct: 80
+      vlans: []

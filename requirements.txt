@@ -1,0 +1,6 @@
+netmiko
+pyyaml
+python-dotenv
+requests
+fastapi
+uvicorn
